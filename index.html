@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infografía - Neurodiversidad y UDL</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* === Variables de diseño === */
+    :root {
+      --primary: #1F3A5F;
+      --primary-light: #2A4F7F;
+      --primary-dark: #152844;
+      --secondary: #4CAF50;
+      --secondary-light: #66BB6A;
+      --secondary-glow: rgba(76, 175, 80, 0.15);
+      --bg: #F5F7FA;
+      --card: #FFFFFF;
+      --text: #1F3A5F;
+      --text-muted: #5A6B80;
+      --border: #E2E8F0;
+      --shadow-sm: 0 1px 3px rgba(31,58,95,0.06);
+      --shadow-md: 0 4px 16px rgba(31,58,95,0.08);
+      --shadow-lg: 0 8px 32px rgba(31,58,95,0.12);
+      --shadow-hover: 0 12px 40px rgba(31,58,95,0.16);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    /* === Reset y base === */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* === Fondo decorativo === */
+    .bg-decoration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-decoration .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.35;
+    }
+
+    .bg-decoration .blob-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--secondary-glow);
+      top: -100px;
+      right: -150px;
+      animation: blobFloat 18s ease-in-out infinite;
+    }
+
+    .bg-decoration .blob-2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(31, 58, 95, 0.06);
+      bottom: 10%;
+      left: -100px;
+      animation: blobFloat 22s ease-in-out infinite reverse;
+    }
+
+    .bg-decoration .blob-3 {
+      width: 200px;
+      height: 200px;
+      background: rgba(76, 175, 80, 0.08);
+      top: 50%;
+      right: -60px;
+      animation: blobFloat 15s ease-in-out infinite 3s;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    /* === Patrón de puntos sutil === */
+    .dot-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+      background-image: radial-gradient(circle, var(--primary) 0.5px, transparent 0.5px);
+      background-size: 32px 32px;
+    }
+
+    /* === Contenedor principal === */
+    .infographic-container {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* === Header === */
+    .infographic-header {
+      text-align: center;
+      margin-bottom: 44px;
+      position: relative;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--secondary);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.3);
+    }
+
+    .header-badge i {
+      font-size: 10px;
+    }
+
+    .header-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 6vw, 36px);
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .header-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* Línea decorativa bajo el header */
+    .header-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--secondary), var(--primary-light));
+      border-radius: 4px;
+      margin: 24px auto 0;
+    }
+
+    /* === Línea vertical conectora === */
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--border) 8%,
+        var(--secondary) 50%,
+        var(--border) 92%,
+        transparent 100%
+      );
+      transform: translateX(-50%);
+      z-index: 0;
+      display: none;
+    }
+
+    /* === Tarjetas === */
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .card {
+      position: relative;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      cursor: default;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      overflow: hidden;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--secondary), var(--primary-light));
+      border-radius: 4px 0 0 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(76, 175, 80, 0.25);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    /* Efecto de brillo en hover */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 0%),
+        rgba(76, 175, 80, 0.04) 0%,
+        transparent 50%
+      );
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    /* === Número de tarjeta === */
+    .card-number {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--bg);
+      line-height: 1;
+      user-select: none;
+      transition: color 0.3s ease;
+      z-index: 0;
+    }
+
+    .card:hover .card-number {
+      color: rgba(76, 175, 80, 0.08);
+    }
+
+    /* === Contenido de tarjeta === */
+    .card-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .card-icon-wrap {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover .card-icon-wrap {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* Variantes de color de icono */
+    .icon-variant-1 {
+      background: linear-gradient(135deg, rgba(31,58,95,0.1), rgba(31,58,95,0.05));
+      color: var(--primary);
+    }
+
+    .icon-variant-2 {
+      background: linear-gradient(135deg, rgba(76,175,80,0.12), rgba(76,175,80,0.05));
+      color: var(--secondary);
+    }
+
+    .icon-variant-3 {
+      background: linear-gradient(135deg, rgba(239,83,80,0.1), rgba(239,83,80,0.04));
+      color: #E53935;
+    }
+
+    .icon-variant-4 {
+      background: linear-gradient(135deg, rgba(76,175,80,0.12), rgba(76,175,80,0.05));
+      color: var(--secondary);
+    }
+
+    .icon-variant-5 {
+      background: linear-gradient(135deg, rgba(255,152,0,0.1), rgba(255,152,0,0.04));
+      color: #F57C00;
+    }
+
+    .card-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--primary);
+      margin-bottom: 8px;
+      line-height: 1.35;
+      letter-spacing: -0.2px;
+    }
+
+    .card-description {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* === Indicador expandible === */
+    .card-expand-hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--secondary);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover .card-expand-hint {
+      opacity: 0.7;
+    }
+
+    .card-expand-hint i {
+      font-size: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .card.expanded .card-expand-hint i {
+      transform: rotate(180deg);
+    }
+
+    /* === Detalle expandido === */
+    .card-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                  margin-top 0.3s ease,
+                  opacity 0.3s ease;
+      opacity: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card.expanded .card-detail {
+      max-height: 200px;
+      margin-top: 16px;
+      opacity: 1;
+    }
+
+    .card-detail-inner {
+      padding: 14px 16px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--secondary);
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* === Indicador de progreso === */
+    .progress-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--secondary), var(--primary-light));
+      z-index: 100;
+      transition: width 0.1s linear;
+      border-radius: 0 2px 2px 0;
+      box-shadow: 0 0 8px rgba(76,175,80,0.4);
+    }
+
+    /* === Separador decorativo === */
+    .separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+
+    .separator-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .separator-dot.active {
+      background: var(--secondary);
+      width: 6px;
+      height: 6px;
+    }
+
+    /* === Footer === */
+    .infographic-footer {
+      margin-top: 44px;
+      padding: 24px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .infographic-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .footer-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .footer-source {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+
+    .footer-source a {
+      color: var(--primary-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .footer-source a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+
+    .footer-credit {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-credit i {
+      color: var(--secondary);
+      font-size: 11px;
+    }
+
+    .footer-credit strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* === Tooltip flotante === */
+    .scroll-tooltip {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 100px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 50;
+      opacity: 1;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .scroll-tooltip.hidden {
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+    }
+
+    .scroll-tooltip i {
+      animation: bounceDown 1.5s ease-in-out infinite;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
+    }
+
+    /* === Reducir movimiento si el usuario lo prefiere === */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .card {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* === Responsive === */
+    @media (max-width: 480px) {
+      .infographic-container {
+        padding: 28px 16px 48px;
+      }
+
+      .card {
+        padding: 22px 18px;
+      }
+
+      .card-number {
+        font-size: 40px;
+        top: 12px;
+        right: 14px;
+      }
+
+      .card-icon-wrap {
+        width: 44px;
+        height: 44px;
+        font-size: 17px;
+      }
+
+      .card-title {
+        font-size: 15px;
+      }
+
+      .card-description {
+        font-size: 13px;
+      }
+
+      .header-title {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de progreso de scroll -->
+  <div class="progress-indicator" id="progressBar" role="progressbar" aria-label="Progreso de lectura"></div>
+
+  <!-- Fondo decorativo -->
+  <div class="bg-decoration" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="dot-pattern" aria-hidden="true"></div>
+
+  <!-- Tooltip de scroll -->
+  <div class="scroll-tooltip" id="scrollTooltip" aria-hidden="true">
+    <i class="fa-solid fa-chevron-down"></i>
+    Desplaza para explorar
+  </div>
+
+  <main class="infographic-container">
+
+    <!-- Encabezado -->
+    <header class="infographic-header">
+      <div class="header-badge">
+        <i class="fa-solid fa-flask"></i>
+        Investigacion Educativa
+      </div>
+      <h1 class="header-title">Neurodiversidad y Aprendizaje Universal</h1>
+      <p class="header-subtitle">Hallazgos clave sobre como el diseno universal de aprendizaje interactua con la neurodiversidad en ingenieria</p>
+      <div class="header-line" aria-hidden="true"></div>
+    </header>
+
+    <!-- Lista de tarjetas -->
+    <section class="card-list" aria-label="Hallazgos principales">
+
+      <!-- Tarjeta 1 -->
+      <article class="card" data-index="0" tabindex="0" role="button" aria-expanded="false">
+        <span class="card-number" aria-hidden="true">01</span>
+        <div class="card-content">
+          <div class="card-icon-wrap icon-variant-1" aria-hidden="true">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div class="card-text">
+            <h2 class="card-title">UDL como enfoque inclusivo</h2>
+            <p class="card-description">El UDL permite adaptar la ensenanza a diferentes formas de aprendizaje mediante multiples formas de representacion, participacion y evaluacion.</p>
+            <div class="card-expand-hint">
+              <span>Mas detalle</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-detail">
+          <div class="card-detail-inner">
+            Las tres directrices del UDL —representacion, accion/expresion y compromiso— ofrecen un marco flexible que reconoce la diversidad cognitiva como la norma, no como la excepcion, en el aula de ingenieria.
+          </div>
+        </div>
+      </article>
+
+      <div class="separator" aria-hidden="true">
+        <span class="separator-dot"></span>
+        <span class="separator-dot active"></span>
+        <span class="separator-dot"></span>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <article class="card" data-index="1" tabindex="0" role="button" aria-expanded="false">
+        <span class="card-number" aria-hidden="true">02</span>
+        <div class="card-content">
+          <div class="card-icon-wrap icon-variant-2" aria-hidden="true">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div class="card-text">
+            <h2 class="card-title">Neurodiversidad como variacion</h2>
+            <p class="card-description">Condiciones como ADHD y depresion se entienden como variaciones normales que afectan el aprendizaje en distintos grados.</p>
+            <div class="card-expand-hint">
+              <span>Mas detalle</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-detail">
+          <div class="card-detail-inner">
+            Este paradigma desplaza el enfoque deficitario hacia uno de variabilidad natural, reconociendo que las diferencias neurologicas confieren tanto desafios como fortalezas en contextos academicos.
+          </div>
+        </div>
+      </article>
+
+      <div class="separator" aria-hidden="true">
+        <span class="separator-dot"></span>
+        <span class="separator-dot active"></span>
+        <span class="separator-dot"></span>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <article class="card" data-index="2" tabindex="0" role="button" aria-expanded="false">
+        <span class="card-number" aria-hidden="true">03</span>
+        <div class="card-content">
+          <div class="card-icon-wrap icon-variant-3" aria-hidden="true">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="card-text">
+            <h2 class="card-title">ADHD reduce la autoeficacia</h2>
+            <p class="card-description">Los estudiantes con mas caracteristicas de ADHD mostraron una disminucion en su confianza academica durante el curso.</p>
+            <div class="card-expand-hint">
+              <span>Mas detalle</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-detail">
+          <div class="card-detail-inner">
+            La autoeficacia es un predictor clave de rendimiento. En estudiantes con rasgos de ADHD, la percepcion de competencia academica disminuyo progresivamente, sugiriendo que el UDL por si solo no es suficiente para este perfil.
+          </div>
+        </div>
+      </article>
+
+      <div class="separator" aria-hidden="true">
+        <span class="separator-dot"></span>
+        <span class="separator-dot active"></span>
+        <span class="separator-dot"></span>
+      </div>
+
+      <!-- Tarjeta 4 -->
+      <article class="card" data-index="3" tabindex="0" role="button" aria-expanded="false">
+        <span class="card-number" aria-hidden="true">04</span>
+        <div class="card-content">
+          <div class="card-icon-wrap icon-variant-4" aria-hidden="true">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <div class="card-text">
+            <h2 class="card-title">Depresion mejora resultados en UDL</h2>
+            <p class="card-description">Los estudiantes con caracteristicas de depresion aumentaron su motivacion, participacion y autoeficacia.</p>
+            <div class="card-expand-hint">
+              <span>Mas detalle</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-detail">
+          <div class="card-detail-inner">
+            Este hallazgo resulta contraintuitivo y sugiere que la flexibilidad del UDL —en plazos, formatos y opciones de participacion— puede actuar como factor protector particularmente eficaz para estudiantes con sintomas depresivos.
+          </div>
+        </div>
+      </article>
+
+      <div class="separator" aria-hidden="true">
+        <span class="separator-dot"></span>
+        <span class="separator-dot active"></span>
+        <span class="separator-dot"></span>
+      </div>
+
+      <!-- Tarjeta 5 -->
+      <article class="card" data-index="4" tabindex="0" role="button" aria-expanded="false">
+        <span class="card-number" aria-hidden="true">05</span>
+        <div class="card-content">
+          <div class="card-icon-wrap icon-variant-5" aria-hidden="true">
+            <i class="fa-solid fa-puzzle-piece"></i>
+          </div>
+          <div class="card-text">
+            <h2 class="card-title">Necesidad de apoyo diferenciado</h2>
+            <p class="card-description">El UDL no beneficia igual a todos, por lo que se requieren estrategias especificas segun el tipo de neurodiversidad.</p>
+            <div class="card-expand-hint">
+              <span>Mas detalle</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-detail">
+          <div class="card-detail-inner">
+            Un enfoque universal no puede ser uniforme. Se requiere personalizar las estrategias dentro del marco UDL, combinando accomodaciones individuales con el diseno inclusivo general del curso.
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="infographic-footer">
+      <div class="footer-label">Referencia</div>
+      <p class="footer-source">
+        Fuente: Examining neurodiversity and student resources in an engineering universal design learning context — DOI:
+        <a href="https://doi.org/10.3389/feduc.2025.1654115" target="_blank" rel="noopener noreferrer">10.3389/feduc.2025.1654115</a>
+      </p>
+      <div class="footer-credit">
+        <i class="fa-solid fa-pen-nib"></i>
+        Disenado por: <strong>Marycielo Rosales</strong>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // === Selección de elementos ===
+    const cards = document.querySelectorAll('.card');
+    const progressBar = document.getElementById('progressBar');
+    const scrollTooltip = document.getElementById('scrollTooltip');
+
+    // === Animación de entrada con IntersectionObserver ===
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Retraso escalonado para cada tarjeta
+          const index = parseInt(entry.target.dataset.index, 10);
+          const delay = index * 100;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach((card) => cardObserver.observe(card));
+
+    // === Efecto de brillo que sigue al mouse ===
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+      });
+    });
+
+    // === Expandir/contraer tarjetas al hacer clic ===
+    cards.forEach((card) => {
+      const toggle = () => {
+        const isExpanded = card.classList.contains('expanded');
+        // Cerrar todas las demás tarjetas
+        cards.forEach((c) => {
+          c.classList.remove('expanded');
+          c.setAttribute('aria-expanded', 'false');
+        });
+        // Alternar la tarjeta actual
+        if (!isExpanded) {
+          card.classList.add('expanded');
+          card.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+
+    // === Barra de progreso de scroll ===
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    // === Ocultar tooltip de scroll tras desplazarse ===
+    let tooltipHidden = false;
+    function handleScrollTooltip() {
+      if (!tooltipHidden && window.scrollY > 80) {
+        scrollTooltip.classList.add('hidden');
+        tooltipHidden = true;
+      }
+    }
+
+    // === Combinar listeners de scroll ===
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress();
+          handleScrollTooltip();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // === Inicializar ===
+    updateProgress();
+  </script>
+</body>
+</html>
